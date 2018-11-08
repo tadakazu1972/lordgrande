@@ -16,6 +16,7 @@
 		598CB0A22193D3A20089F425 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 598CB0A12193D3A20089F425 /* Assets.xcassets */; };
 		598CB0A52193D3A20089F425 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 598CB0A32193D3A20089F425 /* LaunchScreen.storyboard */; };
 		598CB0A82193D3A20089F425 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 598CB0A72193D3A20089F425 /* main.m */; };
+		59DC27772193F93C00585E38 /* LordGrande.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 59DC27762193F93B00585E38 /* LordGrande.atlas */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 		598CB0A42193D3A20089F425 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		598CB0A62193D3A20089F425 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		598CB0A72193D3A20089F425 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		59DC27762193F93B00585E38 /* LordGrande.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = LordGrande.atlas; path = ../../../LordGrande.atlas; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +67,7 @@
 		598CB0902193D39F0089F425 /* lordgrande */ = {
 			isa = PBXGroup;
 			children = (
+				59DC27762193F93B00585E38 /* LordGrande.atlas */,
 				598CB0912193D39F0089F425 /* AppDelegate.h */,
 				598CB0922193D39F0089F425 /* AppDelegate.m */,
 				598CB0942193D39F0089F425 /* GameScene.sks */,
@@ -142,6 +145,7 @@
 				598CB0A02193D39F0089F425 /* Main.storyboard in Resources */,
 				598CB0952193D39F0089F425 /* GameScene.sks in Resources */,
 				598CB0A22193D3A20089F425 /* Assets.xcassets in Resources */,
+				59DC27772193F93C00585E38 /* LordGrande.atlas in Resources */,
 				598CB0A52193D3A20089F425 /* LaunchScreen.storyboard in Resources */,
 				598CB0972193D39F0089F425 /* Actions.sks in Resources */,
 			);
@@ -302,6 +306,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = X7TZM2569N;
 				INFOPLIST_FILE = lordgrande/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -319,6 +324,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = X7TZM2569N;
 				INFOPLIST_FILE = lordgrande/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

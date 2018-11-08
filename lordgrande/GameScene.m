@@ -15,8 +15,9 @@
 
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
-        self.backgroundColor = [SKColor colorWithRed:0.1 green:0.1 blue:0.9 alpha:1.0];
+        self.backgroundColor = [SKColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:1.0];
         
+        [self initParams];
         [self loadImages];
         [self setMyChara];
         //[self setMap];
@@ -52,53 +53,6 @@
         myChara.counter = 0;
     }
 }
-
-/*
-- (void)didMoveToView:(SKView *)view {
-    // Setup your scene here
-    
-    // Get label node from scene and store it for use later
-    _label = (SKLabelNode *)[self childNodeWithName:@"//helloLabel"];
-    
-    _label.alpha = 0.0;
-    [_label runAction:[SKAction fadeInWithDuration:2.0]];
-    
-    CGFloat w = (self.size.width + self.size.height) * 0.05;
-    
-    // Create shape node to use during mouse interaction
-    _spinnyNode = [SKShapeNode shapeNodeWithRectOfSize:CGSizeMake(w, w) cornerRadius:w * 0.3];
-    _spinnyNode.lineWidth = 2.5;
-    
-    [_spinnyNode runAction:[SKAction repeatActionForever:[SKAction rotateByAngle:M_PI duration:1]]];
-    [_spinnyNode runAction:[SKAction sequence:@[
-                                                [SKAction waitForDuration:0.5],
-                                                [SKAction fadeOutWithDuration:0.5],
-                                                [SKAction removeFromParent],
-                                                ]]];
-}
-
-
-- (void)touchDownAtPoint:(CGPoint)pos {
-    SKShapeNode *n = [_spinnyNode copy];
-    n.position = pos;
-    n.strokeColor = [SKColor greenColor];
-    [self addChild:n];
-}
-
-- (void)touchMovedToPoint:(CGPoint)pos {
-    SKShapeNode *n = [_spinnyNode copy];
-    n.position = pos;
-    n.strokeColor = [SKColor blueColor];
-    [self addChild:n];
-}
-
-- (void)touchUpAtPoint:(CGPoint)pos {
-    SKShapeNode *n = [_spinnyNode copy];
-    n.position = pos;
-    n.strokeColor = [SKColor redColor];
-    [self addChild:n];
-}
-*/
 
 // touches ******************************************
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -144,6 +98,12 @@
     [self touchesEnded:touches withEvent:event];
 }
 
+// init parameters *****************************************
+-(void)initParams {
+    //game status
+    gs = 1;
+}
+
 // load images *********************************************
 -(void)loadImages {
     draw = [NSMutableArray array];
@@ -156,13 +116,16 @@
 -(void)setMyChara {
     // set sprite
     sMyChara = [SKSpriteNode spriteNodeWithTexture:draw[0]];
+    sMyChara.texture.filteringMode = SKTextureFilteringNearest; //拡大時ぼやけるのを防止
+    sMyChara.xScale = 2.0;
+    sMyChara.yScale = 2.0;
     sMyChara.position = CGPointMake(0.0f, -64.0f);
     sMyChara.zPosition = 1.0f;
     sMyChara.anchorPoint = CGPointMake(0.0f, 1.0f);
     [self addChild:sMyChara];
     //set parameters
-    myChara.x = 5*8.0f;
-    myChara.y = 5*8.0f;
+    myChara.x = 10 * 8.0f;
+    myChara.y = self.size.height - 10 * 8.0f;
     myChara.wx = myChara.x + 10 * 8.0f;
     myChara.wy = 10 * 8.0f;
     myChara.vx = 0.0f;
@@ -176,8 +139,34 @@
 }
 
 -(void)drawMyChara {
+    //描画
     sMyChara.texture = draw[myChara.i];
     sMyChara.position = CGPointMake(myChara.x, myChara.y);
+    //移動量タッチ判定
+    switch (touch_direction){
+        case 1:
+            myChara.vx = 0.0f;
+            myChara.vy = 1.0f;
+            break;
+        case 2:
+            myChara.vx = 1.0f;
+            myChara.vy = 0.0f;
+            break;
+        case 3:
+            myChara.vx = 0.0f;
+            myChara.vy = -1.0f;
+            break;
+        case 4:
+            myChara.vx = -1.0f;
+            myChara.vy = 0.0f;
+            break;
+    }
+    //カベ判定
+    //ワールド座標変更
+    //画像座標変更
+    myChara.x = myChara.x + myChara.vx;
+    myChara.y = myChara.y + myChara.vy;
 }
 
 @end
+
