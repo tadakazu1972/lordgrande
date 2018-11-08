@@ -11,7 +11,40 @@
 
 @implementation GameViewController
 
-- (void)viewDidLoad {
+- (void)viewWillLayoutSubviews
+{
+    [super viewWillLayoutSubviews];
+    
+    SKView *skView = (SKView *)self.view;
+    
+    //set the view only once, if the device orientation is
+    //rotating viewWillLayoutSubviews will be called again
+    if (!skView.scene)
+    {
+        skView.showsFPS = NO;
+        skView.showsNodeCount = NO;
+        /* Sprite Kit applies additional optimizations to improve rendering perfomance */
+        skView.ignoresSiblingOrder = YES;
+        
+        CGSize gameSize;
+        gameSize.width = 320;
+        if (skView.frame.size.height>240){
+            //iPhone5~
+            gameSize.height = 568;
+        } else {
+            //iPhone4s
+            gameSize.height = 480;
+        }
+        
+        GameScene *scene = [GameScene sceneWithSize:gameSize];
+        scene.scaleMode = SKSceneScaleModeAspectFill;
+        
+        // Present the scene
+        [skView presentScene:scene];
+    }
+}
+
+/*- (void)viewDidLoad {
     [super viewDidLoad];
 
     // Load the SKScene from 'GameScene.sks'
@@ -28,6 +61,7 @@
     skView.showsFPS = YES;
     skView.showsNodeCount = YES;
 }
+*/
 
 - (BOOL)shouldAutorotate {
     return YES;
